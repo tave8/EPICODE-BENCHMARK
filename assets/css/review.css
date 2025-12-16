@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&display=swap");
+* {
+  font-family: "Outfit", sans-serif;
+}
+body {
+  background-image: url("../img/bg.jpg");
+  background-size: cover;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#logo {
+  width: 15%;
+  height: auto;
+}
+h1 {
+  color: white;
+  font-size: 400%;
+  text-align: center;
+  font-weight: bold;
+}
+p {
+  color: white;
+  font-size: 2em;
+  text-align: center;
+}
+button {
+  cursor: pointer;
+  width: 230px;
+  height: 70px;
+  border: none;
+  background-color: #00ffff;
+  box-shadow: #00ffff 0px 0px 15px 5px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #0c113b;
+}
+.proceed {
+  margin-top: 50px;
+  text-align: center;
+}
+form {
+  text-align: center;
+}
+textarea {
+  width: 800px;
+  background-color: transparent;
+  text-decoration: grey;
+  border: none;
+  box-shadow: #c42177 0px 2px 0px 0px;
+  resize: none;
+}
+input {
+  color: white;
+  font-size: x-large;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 20px;
+  width: 800px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  box-shadow: #c42177 0px 2px 0px 0px;
+}
+
+input:focus {
+  outline: none;
+}

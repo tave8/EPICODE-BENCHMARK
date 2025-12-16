@@ -16,19 +16,17 @@
         <p>We don't expect most engineers to know the answers to all of these<br />questions, so don't worry if you're unsure of a few of them.</p>
         <ul>
           <li class="li">Each question is <strong>timed</strong> and can only be <strong>answered once</strong>.</li>
-          <li class="li">Changing browser tab or opening other windows will invaid the question</li>
+          <li class="li">Changing browser tab or opening other windows will <strong>invaid the question</strong></li>
           <li class="li">This exam will take approx. <strong>0-5 minutes</strong>.</li>
         </ul>
       </div>
-      <form action="./test.html">
-        <footer>
-          <label>
-            <input type="checkbox" class="checkbox" required />
-            I promise to answer myself without help from anyone
-          </label>
-          <div class="bottone"><button>PROCEED</button></div>
-        </footer>
-      </form>
+      <footer>
+        <form action="./test.html">
+          <label> <input type="checkbox" name="checkbox" required /></label>
+          <p id="pCheckbox">I promise to answer myself without help from anyone</p>
+          <div class="proceed"><button>PROCEED</button></div>
+        </form>
+      </footer>
     </main>
     <script src="./assets/js/welcome.js"></script>
   </body>

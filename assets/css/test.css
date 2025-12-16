@@ -50,6 +50,7 @@ span {
   letter-spacing: 2px;
   font-weight: 500;
 }
+<<<<<<< HEAD
 
 
 header {
@@ -72,3 +73,8 @@ header > .right {
 header > .right > .timer {
     font-size: 2rem;
 }
+=======
+.clicked {
+  background-color: #d20094;
+}
+>>>>>>> origin/main
