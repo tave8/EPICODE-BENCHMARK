@@ -50,3 +50,6 @@ span {
   letter-spacing: 2px;
   font-weight: 500;
 }
+.clicked {
+  background-color: #d20094;
+}
