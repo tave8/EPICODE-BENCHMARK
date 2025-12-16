@@ -29,8 +29,7 @@ const questions = [
 ];
 
 let indiceDomandaAttuale = 0;
-let ultimoSetInterval = null
-
+let ultimoSetInterval = null;
 
 // questo viene triggerato quando la pagina si carica
 window.addEventListener("load", () => {
@@ -67,9 +66,10 @@ const passaAProssimaDomanda = function () {
   //   TODO: fare meccanismo timer
   // aggiornare l'elemento html interessato ad ogni
 
-   attivaTimerUI({
-     countdownSecondi: prossimaDomanda.countdownSecondi
-   });
+  //   DISATTIVA TEMPORANEAMENTE TIMER PER POTER LAVORARE NELLA PAGINA
+  attivaTimerUI({
+    countdownSecondi: prossimaDomanda.countdownSecondi,
+  });
 
   // verifica che le domande non siano già arrivate alla fine
   // if () {
@@ -80,47 +80,43 @@ const passaAProssimaDomanda = function () {
   aggiornaNumeroDomandeUI(indiceDomandaAttuale);
 };
 
-
-
 function attivaTimerUI({ countdownSecondi }) {
-    const timerEl = document.querySelector("header > .right > .timer")
-    let nuovoTempo = countdownSecondi
+  const timerEl = document.querySelector("header > .right > .timer");
+  let nuovoTempo = countdownSecondi;
 
-    // questa funzionalità permette di pulire il setInterval precedente,
-    // questo evita il problema di setInterval che si "accavallano"
-    clearInterval(ultimoSetInterval)
-    
-    const intervalloTempo = () => {
-        // verifica se il tempo arriva allo zero
-        // se si, passa alla prossima domanda
-        const eTempoAZero = nuovoTempo === 0
+  // questa funzionalità permette di pulire il setInterval precedente,
+  // questo evita il problema di setInterval che si "accavallano"
+  clearInterval(ultimoSetInterval);
 
-        // se il tempo è a zero, passa alla prossima domanda
-        if (eTempoAZero) {
-            passaAProssimaDomanda()
-        }
-        // altrimenti (se il timer è ancora attivo) aggiorna
-        // il timer nell'UI
-        else {
-            timerEl.textContent = nuovoTempo
-        }
-        // il nuovo tempo sarà il tempo attuale - 1 (secondo)
-        nuovoTempo = nuovoTempo - 1
+  const intervalloTempo = () => {
+    // verifica se il tempo arriva allo zero
+    // se si, passa alla prossima domanda
+    const eTempoAZero = nuovoTempo === 0;
+
+    // se il tempo è a zero, passa alla prossima domanda
+    if (eTempoAZero) {
+      passaAProssimaDomanda();
     }
+    // altrimenti (se il timer è ancora attivo) aggiorna
+    // il timer nell'UI
+    else {
+      timerEl.textContent = nuovoTempo;
+    }
+    // il nuovo tempo sarà il tempo attuale - 1 (secondo)
+    nuovoTempo = nuovoTempo - 1;
+  };
 
-    // problema: setInterval continua all'infinito, invece dovrebbe
-    // resettarsi ogni volta che si passa ad una nuova domanda
+  // problema: setInterval continua all'infinito, invece dovrebbe
+  // resettarsi ogni volta che si passa ad una nuova domanda
 
-    // salva l'ultimo setInterval così potrai cancellare l'esecuzione
-    // della funzione che c'era all'interno
-    ultimoSetInterval = setInterval(() => {
-        intervalloTempo()
-    }, 1000)
+  // salva l'ultimo setInterval così potrai cancellare l'esecuzione
+  // della funzione che c'era all'interno
+  ultimoSetInterval = setInterval(() => {
+    intervalloTempo();
+  }, 1000);
 
-    intervalloTempo()
-
+  intervalloTempo();
 }
-
 
 function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
   const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
@@ -180,3 +176,32 @@ function ottieniTutteRisposte(domandaObj) {
 function haiTerminatoDomande() {
   return indiceDomandaAttuale === questions.length;
 }
+
+// FUNZIONALITà DI TIMER
+
+// var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+// var yValues = [55, 49, 44, 24, 15];
+// var barColors = [
+//   "#b91d47",
+//   "#00aba9",
+//   "#2b5797",
+//   "#e8c3b9",
+//   "#1e7145"
+// ];
+
+// const chart = new Chart("myChart", {
+//   type: "doughnut",
+//   data: {
+//     labels: xValues,
+//     datasets: [{
+//       backgroundColor: barColors,
+//       data: yValues
+//     }]
+//   },
+//   options: {
+//     title: {
+//       display: true,
+//       text: "World Wide Wine Production 2018"
+//     }
+//   }
+// });
