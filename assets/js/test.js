@@ -52,7 +52,7 @@ function handleClickBottoneRisposta(ev) {
 const passaAProssimaDomanda = function () {
   if (haiTerminatoDomande()) {
     // passa alla prossima pagina
-    // window.location = "./results.html";
+    window.location.href = "./results.html";
     return;
   }
 
