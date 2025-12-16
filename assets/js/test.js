@@ -30,7 +30,11 @@ const questions = [
 
 let indiceDomandaAttuale = 0;
 
+// questo viene triggerato quando la pagina si carica
 window.addEventListener("load", () => {
+  // passa subito alla prossima domanda
+  passaAProssimaDomanda();
+  //   configura/aggiungi event listeners
   addEventListeners();
 });
 
@@ -49,17 +53,16 @@ const passaAProssimaDomanda = function () {
   if (haiTerminatoDomande()) {
     // passa alla prossima pagina
     // window.location = "./results.html"
-    return 
+    return;
   }
 
-  const indiceProssimaDomanda = indiceDomandaAttuale + 1;
-  const prossimaDomanda = questions[indiceProssimaDomanda];
+  const prossimaDomanda = questions[indiceDomandaAttuale];
   //   incremento il contatore attuale
   indiceDomandaAttuale += 1;
 
-  aggiornaDomandaUI(prossimaDomanda)
+  aggiornaDomandaUI(prossimaDomanda);
 
-//    attivaCountdownUIIn();
+  //    attivaCountdownUIIn();
 
   // verifica che le domande non siano già arrivate alla fine
   // if () {
@@ -78,45 +81,43 @@ const passaAProssimaDomanda = function () {
 //     countdownSecondi: 40,
 //   },
 function aggiornaDomandaUI(domandaObj) {
-    // prendi l'html di interesse
-    // html domanda
-    const domandaEl = document.querySelector(".question > h1")
-    domandaEl.textContent = domandaObj.question
-    const tutteRisposte = ottieniTutteRisposte(domandaObj)
-    let indiceRisposta = 0
-    
-    const bottoniRisposteEl = document.querySelectorAll(".risposte > .bottoni")
+  // prendi l'html di interesse
+  // html domanda
+  const domandaEl = document.querySelector(".question > h1");
+  domandaEl.textContent = domandaObj.question;
+  const tutteRisposte = ottieniTutteRisposte(domandaObj);
+  let indiceRisposta = 0;
 
-    // siccome alcune domande hanno un numero variabili di risposte, 
-    // nello specifico o 2 o 4, allora vanno eliminati gli elementi html
-    // in più. si assume che l'html delle risposte avrà sempre 4 elementi html.
-    const secondoContenitoreRisposte = document.querySelectorAll(".risposte")[1]
-    
-    // quando la domanda ha due risposte, nascondi il secondo contenitore
-    if (tutteRisposte.length === 2) {
-        // elimina il secondo (si assume che sia anche l'ultimo) contenitore
-        // di risposte. il contenitore di risposte si identifica con .risposte
-        secondoContenitoreRisposte.style.display = "none"
-    } 
-    // quando la domanda ha quattro risposte, mostra il secondo contenitore
-    else if (tutteRisposte.length === 4) {
-        secondoContenitoreRisposte.style.display = "block"
-    }
+  const bottoniRisposteEl = document.querySelectorAll(".risposte > .bottoni");
 
-    tutteRisposte.forEach(testoRisposta => {
-        bottoniRisposteEl[indiceRisposta].textContent = testoRisposta
-        indiceRisposta += 1
-    })
+  // siccome alcune domande hanno un numero variabili di risposte,
+  // nello specifico o 2 o 4, allora vanno eliminati gli elementi html
+  // in più. si assume che l'html delle risposte avrà sempre 4 elementi html.
+  const secondoContenitoreRisposte = document.querySelectorAll(".risposte")[1];
 
+  // quando la domanda ha due risposte, nascondi il secondo contenitore
+  if (tutteRisposte.length === 2) {
+    // elimina il secondo (si assume che sia anche l'ultimo) contenitore
+    // di risposte. il contenitore di risposte si identifica con .risposte
+    secondoContenitoreRisposte.style.display = "none";
+  }
+  // quando la domanda ha quattro risposte, mostra il secondo contenitore
+  else if (tutteRisposte.length === 4) {
+    secondoContenitoreRisposte.style.display = "block";
+  }
+
+  tutteRisposte.forEach((testoRisposta) => {
+    bottoniRisposteEl[indiceRisposta].textContent = testoRisposta;
+    indiceRisposta += 1;
+  });
 }
 
-
 // TODO: inserire funzionalità per randomizzare l'inserimento della risposta corretta
-function ottieniTutteRisposte (domandaObj) {
-    const correctAnswer = domandaObj.correct_answer
-    const incorrectAnswers = domandaObj.incorrect_answers
-    const allAnswers = [correctAnswer, ...incorrectAnswers]
-    return allAnswers
+function ottieniTutteRisposte(domandaObj) {
+  const correctAnswer = domandaObj.correct_answer;
+  const incorrectAnswers = domandaObj.incorrect_answers;
+  const allAnswers = [correctAnswer, ...incorrectAnswers];
+  return allAnswers;
 }
 
 function haiTerminatoDomande() {
