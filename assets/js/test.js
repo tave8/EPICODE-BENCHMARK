@@ -52,7 +52,7 @@ function handleClickBottoneRisposta(ev) {
 const passaAProssimaDomanda = function () {
   if (haiTerminatoDomande()) {
     // passa alla prossima pagina
-    // window.location = "./results.html"
+    // window.location = "./results.html";
     return;
   }
 
@@ -68,6 +68,11 @@ const passaAProssimaDomanda = function () {
   // if () {
 
   // }
+
+  //   aggiorna anche il numero di domande nel footer
+  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`
+  document.querySelector("footer .questionNumber").textContent = testoConNumDomanda
+
 };
 
 // SCHEMA DOMANDA
