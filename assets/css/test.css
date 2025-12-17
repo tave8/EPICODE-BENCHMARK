@@ -70,7 +70,15 @@ header > .right {
 header > .right > .timer {
   font-size: 2rem;
 }
-.right {
+.timer {
+  width: 140px;
+  height: 140px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,6 +93,11 @@ header > .right > .timer {
 }
 
 .timer > .ringsvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
   width: 100%;
   height: 100%;
   transform: rotate(-90deg);
