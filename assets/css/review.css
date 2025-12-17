@@ -52,6 +52,7 @@ textarea {
 .stella {
   margin: 5px;
   width: 6%;
+  cursor: pointer;
 }
 .valutazione {
   margin-bottom: 70px;
