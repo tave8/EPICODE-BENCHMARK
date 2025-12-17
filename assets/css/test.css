@@ -70,6 +70,8 @@ header > .right {
 header > .right > .timer {
   font-size: 2rem;
 }
+
+/* CONTENITORE DEL TIMER */
 .timer {
   width: 140px;
   height: 140px;
@@ -83,6 +85,10 @@ header > .right > .timer {
   justify-content: center;
   align-items: center;
 }
+
+
+/* ELEMENTI INTERNI AL TIMER (CIAMBELLA che diventa sempre più piccola) */
+
 .timer > .ring {
   width: 140px;
   height: 140px;

@@ -30,6 +30,7 @@ const questions = [
 
 let indiceDomandaAttuale = 0;
 let ultimoSetInterval = null;
+let ultimoSetIntervalCiambella = null
 
 // questo viene triggerato quando la pagina si carica
 window.addEventListener("load", () => {
@@ -134,23 +135,32 @@ function attivaTimerUI({ countdownSecondi }) {
 
 function attivaCiambellaTimer() {
   const ring = document.querySelector(".timer > .ringsvg > .ringprogress");
-  const CIRC = 283;
+  const CIRC = 100;
 
   function setRingProgress(progress) {
     ring.style.strokeDashoffset = CIRC * (1 - progress);
   }
-  let p = 1;
-  setRingProgress(p);
-  const id = setInterval(() => {
-    p += 0.02;
-    if (p <= 0) {
-      p = 0;
-      clearInterval(id);
+
+  let progress = 1;
+  setRingProgress(progress);
+
+  const eseguiOgniSecondo = function() {
+    // cancella l'esecuzione della funziona che aggiorna la ciambella 
+    clearInterval(ultimoSetIntervalCiambella)
+
+    progress += 1;
+    
+    if (progress <= 0) {
+      progress = 0;
+      clearInterval(ultimoSetIntervalCiambella);
     }
-    setRingProgress(p);
-  }, 1000);
+    setRingProgress(progress);
+  }
+
+  ultimoSetIntervalCiambella = setInterval(eseguiOgniSecondo, 1000);
+
 }
-// attivaCiambellaTimer();
+
 
 function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
   const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
