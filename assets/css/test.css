@@ -51,6 +51,13 @@ span {
   font-weight: 500;
 }
 
+/* TODO: creare classe "risposta-selected" quando il bottone che contiene
+la risposta viene cliccata */
+
+.risposta-selected {
+  background-color: red;
+}
+
 
 header {
   display: flex;
@@ -60,15 +67,11 @@ header {
 }
 
 header > .left {
-
 }
-
 
 header > .right {
-
 }
 
-
 header > .right > .timer {
-    font-size: 2rem;
+  font-size: 2rem;
 }

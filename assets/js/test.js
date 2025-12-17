@@ -47,14 +47,22 @@ function addEventListeners() {
 }
 
 function handleClickBottoneRisposta(ev) {
-  // TODO: quando utente clicca risposta, aggiungere classe per evidenziare
-  //
-  //   ev.target.classList.add("");
-
-  passaAProssimaDomanda();
+  passaAProssimaDomanda({
+    // bottonCliccatoEl: ev.target,
+  });
 }
 
-const passaAProssimaDomanda = function () {
+const passaAProssimaDomanda = function (config={}) {
+  const { bottonCliccatoEl } = config;
+
+  // togli, da tutti gli elementi html che hanno la classa risposta-selected, la classa risposta-selected
+  // document.querySelectorAll(".risposta-selected").forEach((el) => el.classList.remove("risposta-selected"));
+
+  // if (bottonCliccatoEl) {
+    // quando utente clicca una risposta, marcare quella risposta come evidenziata
+    // bottonCliccatoEl.classList.add("risposta-selected");
+  // }
+
   if (haiTerminatoDomande()) {
     caricaPaginaRisultati();
     // passa alla prossima pagina
@@ -129,19 +137,19 @@ function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
 
 function caricaPaginaRisultati() {
   // TODO
-  const totDomande = questions.length
-  const totDomandeGiuste = 1
-  const totDomandeSbagliate = totDomande - totDomandeGiuste
+  const totDomande = questions.length;
+  const totDomandeGiuste = 1;
+  const totDomandeSbagliate = totDomande - totDomandeGiuste;
 
   const risultatiTest = {
     totDomande,
-    totDomandeGiuste, 
-    totDomandeSbagliate 
-  }
+    totDomandeGiuste,
+    totDomandeSbagliate,
+  };
 
-  const risultatiTestStr = JSON.stringify(risultatiTest)
+  const risultatiTestStr = JSON.stringify(risultatiTest);
 
-  const url = `/results.html?risultatiTest=${risultatiTestStr}`
+  const url = `/results.html?risultatiTest=${risultatiTestStr}`;
   window.location.href = url;
 }
 
