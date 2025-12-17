@@ -55,23 +55,18 @@ span {
 la risposta viene cliccata */
 
 .risposta-selected {
-  /* background-color: red; */
+  background-color: #d20094;
 }
-
-
 header {
   display: flex;
   justify-content: space-around;
   flex: 1;
   color: white;
 }
-
 header > .left {
 }
-
 header > .right {
 }
-
 header > .right > .timer {
   font-size: 2rem;
 }
