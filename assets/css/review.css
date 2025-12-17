@@ -49,6 +49,14 @@ textarea {
   box-shadow: #c42177 0px 2px 0px 0px;
   resize: none;
 }
+.stella {
+  margin: 5px;
+  width: 6%;
+}
+.valutazione {
+  margin-bottom: 70px;
+  text-align: center;
+}
 input {
   color: white;
   font-size: x-large;
@@ -61,7 +69,6 @@ input {
   border: none;
   box-shadow: #c42177 0px 2px 0px 0px;
 }
-
 input:focus {
   outline: none;
 }
