@@ -150,6 +150,7 @@ function initCiambella() {
     ring,
     CIRC,
   };
+  
 }
 
 // ciambella timber
