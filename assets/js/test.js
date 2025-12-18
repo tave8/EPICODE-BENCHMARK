@@ -1,19 +1,13 @@
 let indiceDomandaAttuale = 0;
 let ultimoSetInterval = null;
 
-// questo contatore conta il totale delle risposte giuste
-let contatoreRisposteGiuste = 0;
-
-function main() {
-  // questo viene triggerato quando la pagina si carica
-  window.addEventListener("load", () => {
-    // passa subito alla prossima domanda
-    passaAProssimaDomanda();
-    //   configura/aggiungi event listeners
-    addEventListeners();
-  });
-}
-main();
+// questo viene triggerato quando la pagina si carica
+window.addEventListener("load", () => {
+  // passa subito alla prossima domanda
+  passaAProssimaDomanda();
+  //   configura/aggiungi event listeners
+  addEventListeners();
+});
 
 function addEventListeners() {
   const bottoniRisposta = document.querySelectorAll(".risposte > .bottoni");
@@ -23,30 +17,20 @@ function addEventListeners() {
 }
 
 function handleClickBottoneRisposta(ev) {
-  // prendi il valore della risposta nel campo html
-  const rispostaCliccataDaUtente = ev.target.innerText;
-  // comparalo con la risposta giusta della domanda attuale
-  const indiceDomandaAttuale = indiceProssimaDomanda - 1;
+  // rimuove la selezione da tutti i bottoni
+  document.querySelectorAll(".risposte .bottoni").forEach((btn) => btn.classList.remove("risposta-selected"));
 
-  const rispostaGiustaReale = questions[indiceDomandaAttuale].correct_answer;
+  // evidenzia SOLO il bottone cliccato
+  ev.target.classList.add("risposta-selected");
 
-  const rispostaEGiusta = rispostaGiustaReale === rispostaCliccataDaUtente;
+  // passa alla prossima domanda dopo 500ms
+  setTimeout(() => {
+    passaAProssimaDomanda();
+  }, 500);
+}
 
-  // attiva/disattiva questo per verificare come la risposta cliccata da utente
-  // corrisponde alla risposta giusta reale
-  // console.log("indice domanda attuale: ", indiceProssimaDomanda);
-  // console.log("risposta cliccata da utente: ", rispostaCliccataDaUtente);
-  // console.log("risposta giusta reale: ", rispostaGiustaReale);
-  // console.log("risposta giusta:", rispostaEGiusta ? "SI" : "NO");
-  // console.log("-----------------------------------------------")
-
-  if (rispostaEGiusta) {
-    contatoreRisposteGiuste += 1;
-  }
-
-  passaAProssimaDomanda({
-    // bottonCliccatoEl: ev.target,
-  });
+function resetSelezioneRisposte() {
+  document.querySelectorAll(".bottoni").forEach((btn) => btn.classList.remove("risposta-selected"));
 }
 
 const passaAProssimaDomanda = function (config = {}) {
@@ -61,16 +45,16 @@ const passaAProssimaDomanda = function (config = {}) {
   // }
 
   if (haiTerminatoDomande()) {
-    passaAPaginaRisultati();
+    caricaPaginaRisultati();
     // passa alla prossima pagina
     return;
   }
 
-  const prossimaDomanda = questions[indiceProssimaDomanda];
+  const prossimaDomanda = questions[indiceDomandaAttuale];
   //   incremento il contatore attuale
-  indiceProssimaDomanda += 1;
-
-  aggiornaDomandaERisposteUI(prossimaDomanda);
+  indiceDomandaAttuale += 1;
+  resetSelezioneRisposte();
+  aggiornaDomandaUI(prossimaDomanda);
 
   //   TODO: fare meccanismo timer
   // aggiornare l'elemento html interessato ad ogni
@@ -86,7 +70,7 @@ const passaAProssimaDomanda = function (config = {}) {
   // }
 
   //   aggiorna anche il numero di domande nel footer
-  aggiornaNumeroDomandeUI(indiceProssimaDomanda);
+  aggiornaNumeroDomandeUI(indiceDomandaAttuale);
 };
 
 function attivaTimerUI({ countdownSecondi }) {
@@ -183,23 +167,17 @@ function attivaCiambellaTimer() {
     setRingProgress(p);
   }, 1000);
 }
+// attivaCiambellaTimer();
 
-function getCiambellaRingEl() {
-  return document.querySelector(".timer > .ringsvg > .ringprogress");
-}
-
-function calcolaCIRC(radius) {
-  return 2 * Math.PI * radius;
-}
-
-function aggiornaNumeroDomandeUI(indiceProssimaDomanda) {
-  const testoConNumDomanda = `QUESTION ${indiceProssimaDomanda} / ${questions.length}`;
+function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
+  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale}`;
   document.querySelector("footer .questionNumber").textContent = testoConNumDomanda;
 }
 
-function passaAPaginaRisultati() {
+function caricaPaginaRisultati() {
+  // TODO
   const totDomande = questions.length;
-  const totDomandeGiuste = contatoreRisposteGiuste;
+  const totDomandeGiuste = 1;
   const totDomandeSbagliate = totDomande - totDomandeGiuste;
 
   const risultatiTest = {
@@ -224,15 +202,12 @@ function passaAPaginaRisultati() {
 //     incorrect_answers: ["Static", "Private", "Public"],
 //     countdownSecondi: 40,
 //   },
-function aggiornaDomandaERisposteUI(domandaObj) {
+function aggiornaDomandaUI(domandaObj) {
   // prendi l'html di interesse
   // html domanda
   const domandaEl = document.querySelector(".question > h1");
-  // questo è un array di stringhe che contiene TUTTE le risposte
-  // di una data domanda
-  const tutteRisposte = ottieniTutteRisposte(domandaObj);
-
   domandaEl.textContent = domandaObj.question;
+  const tutteRisposte = ottieniTutteRisposte(domandaObj);
   let indiceRisposta = 0;
 
   const bottoniRisposteEl = document.querySelectorAll(".risposte > .bottoni");
@@ -253,19 +228,10 @@ function aggiornaDomandaERisposteUI(domandaObj) {
     secondoContenitoreRisposte.style.display = "block";
   }
 
-  // questo passo intermedio randomizza le risposte, cioè
-  // garantisce che la risposta giusta non sarà mai allo stesso indice
-  const tutteRisposteRandomizzate = randomizzaRisposte(tutteRisposte);
-
-  // itera per ogni risposta della data domanda, e presentala nell'interfaccia
-  tutteRisposteRandomizzate.forEach((testoRisposta) => {
+  tutteRisposte.forEach((testoRisposta) => {
     bottoniRisposteEl[indiceRisposta].textContent = testoRisposta;
     indiceRisposta += 1;
   });
-}
-
-function randomizzaRisposte(risposte) {
-  return shuffleArray(risposte);
 }
 
 // TODO: inserire funzionalità per randomizzare l'inserimento della risposta corretta
@@ -277,13 +243,5 @@ function ottieniTutteRisposte(domandaObj) {
 }
 
 function haiTerminatoDomande() {
-  return indiceProssimaDomanda === questions.length;
-}
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // swap
-  }
-  return array;
+  return indiceDomandaAttuale === questions.length;
 }
