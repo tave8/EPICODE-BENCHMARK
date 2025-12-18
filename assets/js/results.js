@@ -10,6 +10,7 @@ function quandoPaginaCarica() {
   mostraRisultatiInGrafico(risultatiTest);
   mostraPercentualiTesto(risultatiTest);
   mostraNumeroDomandeSuTotale(risultatiTest);
+  mostraEsitoTest(risultatiTest);
 }
 
 function mostraNumeroDomandeSuTotale(risultatiTest) {
@@ -96,4 +97,13 @@ function ottieniRisultatiTestDaUrl() {
     totDomandeSbagliate: risultatiTest.totDomandeSbagliate,
     totDomandeGiuste: risultatiTest.totDomandeGiuste,
   };
+}
+
+function mostraEsitoTest(risultatiTest) {
+  const esitoTest = document.getElementById("esito");
+  if (risultatiTest.totDomandeGiuste > risultatiTest.totDomandeSbagliate) {
+    esitoTest.textContent = "Promosso✅";
+  } else {
+    esitoTest.textContent = "Bocciato❌";
+  }
 }
