@@ -21,8 +21,11 @@
         </p>
 
         <!-- grafico che mostra i risultati del test -->
-        <canvas id="myChart" style="max-width: 1000px; height: 400px"></canvas>
-        <div id="esito"></div>
+        <div id="containerx">
+          <div id="esito"></div>
+          <canvas id="myChart" style="max-width: 1000px; height: 400px"></canvas>
+        </div>
+
         <p class="right">
           Wrong
           <!-- qui si vede solo la percentuale sbagliate, quindi "20%" -->
@@ -34,7 +37,7 @@
     </main>
 
     <footer>
-      <button>RATE US</button>
+      <form action="./review.html"><button>RATE US</button></form>
     </footer>
 
     <!-- librerie chartjs -->
