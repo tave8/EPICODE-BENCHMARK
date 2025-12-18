@@ -22,13 +22,13 @@ main {
 }
 h1 {
   color: white;
-  font-size: 500%;
+  font-size: 5rem;
   text-align: center;
   font-weight: bold;
 }
 p {
   color: white;
-  font-size: 250%;
+  font-size: 2.5rem;
   text-align: center;
   font-weight: 400;
 }
@@ -38,12 +38,14 @@ p {
   margin: 5rem;
   margin-right: 7rem;
   flex-wrap: wrap;
+  min-width: 390px;
 }
 .left,
 .right {
   padding-top: 5rem;
-  font-size: 500%;
+  font-size: 5rem;
 }
+
 footer {
   display: flex;
   justify-content: center;
@@ -52,19 +54,104 @@ footer {
   display: flex;
   justify-content: center;
 }
+
 button {
   width: 100%;
   height: 80px;
   background-color: transparent;
   border: 3px solid white;
-  box-shadow: #00ffff 0px 0px 10px 0px;
   cursor: pointer;
   color: white;
   font-size: xx-large;
   font-weight: bold;
   margin-top: 0;
+  text-align: center;
 }
 form {
   text-align: center;
   width: 300px;
 }
+
+#percentuale-domande-sbagliate {
+  display: block;
+  margin-top: 80px;
+  justify-self: flex-end;
+  font-weight: bold;
+  font-size: 90%;
+  padding-right: 10px;
+}
+
+#percentuale-domande-giuste {
+  display: block;
+  margin-top: 80px;
+  justify-self: flex-start;
+  font-weight: bold;
+  font-size: 90%;
+  padding-left: 5px;
+}
+
+#numero-domande-giuste {
+  display: block;
+  justify-self: flex-start;
+  margin-top: 50px;
+  padding-left: 5px;
+  font-size: 30%;
+}
+
+#numero-domande-sbagliate {
+  display: block;
+  justify-self: flex-end;
+  margin-top: 50px;
+  padding-right: 15px;
+  font-size: 30%;
+}
+
+canvas {
+  min-width: 23%;
+  min-height: 30%;
+}
+
+#containerx {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#esito {
+  text-align: center;
+  width: 20%;
+  height: 20%;
+  margin-top: 11%;
+  position: absolute;
+  color: white;
+  font-size: large;
+}
+
+/* numeri e percentuali vicine al grafico che mostra i risultati
+QUESTO SOTTO COMMENTATO potrebbe creare conflitto.
+idea di Sergio all'ora 10.45 del giorno 18/12 .
+DECIDERE se rimuovere o tenere */
+
+/* #percentuale-domande-giuste {
+  display: flex;
+  margin-top: 80px;
+  text-align: left;
+}
+
+#percentuale-domande-sbagliate {
+  display: flex;
+  justify-self: flex-end;
+  margin-top: 80px;
+}
+
+#numero-domande-giuste {
+  display: flex;
+  margin-top: 80px;
+  text-align: left;
+}
+
+#numero-domande-sbagliate {
+  display: flex;
+  justify-self: flex-end;
+  margin-top: 80px;
+} */

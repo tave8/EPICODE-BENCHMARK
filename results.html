@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>results</title>
     <link rel="stylesheet" href="./assets/css/results.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   </head>
   <body>
     <header><img id="logo" src="./assets/img/epicode_logo.png" alt="logo" /></header>
@@ -13,9 +12,27 @@
       <h1>Results</h1>
       <p>The summary of your answers:</p>
       <div class="container">
-        <p class="left">Correct</p>
-        <canvas id="myChart" style="max-width: 1000px; height: 400px"></canvas>
-        <p class="right">Wrong</p>
+        <p class="left">
+          Correct
+          <!-- qui si vede solo la percentuale sbagliate, quindi "80%" -->
+          <span id="percentuale-domande-giuste"></span>
+          <!-- qui si vede qualcosa del tipo "15 / 20 questions" -->
+          <span id="numero-domande-giuste"></span>
+        </p>
+
+        <!-- grafico che mostra i risultati del test -->
+        <div id="containerx">
+          <div id="esito"></div>
+          <canvas id="myChart" style="max-width: 1000px; height: 400px"></canvas>
+        </div>
+
+        <p class="right">
+          Wrong
+          <!-- qui si vede solo la percentuale sbagliate, quindi "20%" -->
+          <span id="percentuale-domande-sbagliate"> </span>
+          <!-- qui si vede qualcosa del tipo "5 / 20 questions" -->
+          <span id="numero-domande-sbagliate"></span>
+        </p>
       </div>
     </main>
 
@@ -24,6 +41,10 @@
         <button>RATE US</button>
       </form>
     </footer>
+
+    <!-- librerie chartjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- script per la funzionalità dei risultati del test -->
     <script src="assets/js/results.js"></script>
   </body>
 </html>
