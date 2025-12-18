@@ -45,33 +45,40 @@ function mostraRisultatiInGrafico(risultatiTest) {
   // questa libreria non ha bisogno di un pre-calcolo
   // su base 100, ma calcola automaticamente la base 100 derivandola
   // da tot domande giuste e tot domande sbagliate
+
+  const paginaECaricata = document.readyState === "complete";
+
+  if (paginaECaricata) {
+    creaGrafico(risultatiTest);
+  } else {
+    window.addEventListener("load", () => {
+      creaGrafico(risultatiTest);
+    });
+  }
+}
+
+function creaGrafico(risultatiTest) {
   let xValues = ["Wrong", "Correct"];
   let yValues = [risultatiTest.totDomandeSbagliate, risultatiTest.totDomandeGiuste];
   let barColors = ["#b91d47", "#00aba9"];
 
-  window.addEventListener("load", () => {
-    
-    const graph = document.getElementById("myChart"); // inserisci codice qui
-
-    new Chart("myChart", {
-      type: "doughnut",
-      data: {
-        datasets: [
-          {
-            backgroundColor: barColors,
-            data: yValues,
-          },
-        ],
-      },
-      options: {
-        cutoutPercentage: 70,
-        tooltips: {
-          enabled: false,
+  new Chart("myChart", {
+    type: "doughnut",
+    data: {
+      datasets: [
+        {
+          backgroundColor: barColors,
+          data: yValues,
         },
+      ],
+    },
+    options: {
+      cutoutPercentage: 70,
+      tooltips: {
+        enabled: false,
       },
-    });
+    },
   });
-  
 }
 
 function ottieniRisultatiTestDaUrl() {
