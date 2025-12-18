@@ -56,3 +56,32 @@ button {
   font-weight: bold;
   margin-top: 0;
 }
+
+/* numeri e percentuali vicine al grafico che mostra i risultati
+QUESTO SOTTO COMMENTATO potrebbe creare conflitto.
+idea di Sergio all'ora 10.45 del giorno 18/12 .
+DECIDERE se rimuovere o tenere */
+
+/* #percentuale-domande-giuste {
+  display: flex;
+  margin-top: 80px;
+  text-align: left;
+}
+
+#percentuale-domande-sbagliate {
+  display: flex;
+  justify-self: flex-end;
+  margin-top: 80px;
+}
+
+#numero-domande-giuste {
+  display: flex;
+  margin-top: 80px;
+  text-align: left;
+}
+
+#numero-domande-sbagliate {
+  display: flex;
+  justify-self: flex-end;
+  margin-top: 80px;
+} */
